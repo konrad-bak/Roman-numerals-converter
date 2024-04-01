@@ -73,3 +73,34 @@ button {
 button {
   font-size: calc(10px + 2vmin);
 }
+
+.result {
+  font-size: large;
+}
+.result span {
+  font-weight: bold;
+}
+
+button.button-action {
+  margin-top: 20px;
+}
+
+button.button-action:disabled,
+button.button-action:disabled:hover {
+  background-color: hsl(0, 0%, 56%);
+}
+
+button.button-action:hover {
+  background-color: #674996;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+}
+.table,
+.list {
+  max-width: 400px;
+  align-self: center;
+  text-align: left;
+}
