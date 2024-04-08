@@ -1,14 +1,21 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 import romanCharsConverter from './utils/romanCharsConverter';
+
+type SystemTypes = 'Vinculum' | 'Apostrophus';
 
 function App() {
   const [input, setInput] = useState<number>();
   const [result, setResult] = useState<string>('');
+  const [system, setSystem] = useState<SystemTypes>('Vinculum');
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleRadioValueChange = (value: SystemTypes): void => {
+    setSystem(value);
+  };
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(parseInt(e.target.value));
   };
 
@@ -91,6 +98,23 @@ function App() {
         <p>Please input number:</p>
         <input value={input} onChange={handleChangeInput} type="number" />
         <br />
+        <div className="systems">
+          <input
+            type="radio"
+            value="Vinculum"
+            name="system"
+            onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
+            checked
+          />{' '}
+          Vinculum
+          <input
+            type="radio"
+            value="Apostrophus"
+            name="system"
+            onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
+          />{' '}
+          Apostrophus
+        </div>
         <button className="button-action" onClick={handleClick} disabled={!input}>
           Convert
         </button>
@@ -98,6 +122,7 @@ function App() {
           Result: <span>{result}</span>
         </p>
       </div>
+      <hr />
       <div className="note">
         <h2>Note</h2>
         <p>For numbers up to 3999, we Romans generally used:</p>
@@ -196,8 +221,8 @@ function App() {
         </p>
 
         <p>
-          This topic extends in the wikipedia article, but for simplicity I've handled
-          larger numbers in this manner:
+          This topic extends in the wikipedia article, but for simplicity I&apos;ve
+          handled larger numbers in this manner:
         </p>
 
         <ul className="list">

@@ -1,3 +1,5 @@
+// Convert individual number to roman numeral
+
 const romanCharsConverter = (
   currNumber: number,
   currSingularChar: string,
