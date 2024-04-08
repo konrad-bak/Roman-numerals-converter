@@ -85,6 +85,7 @@ function App() {
           );
           resultString = currRomanChars + resultString;
         }
+        resultString = ' ' + resultString;
       }
 
       setResult(resultString);
@@ -99,6 +100,13 @@ function App() {
         <input value={input} onChange={handleChangeInput} type="number" />
         <br />
         <div className="systems">
+          <p>
+            Choose <i>Roman Numerals System</i> for{' '}
+            <b>
+              large numbers( <i>3999+</i> )
+            </b>
+            <i>[default &quot;Vinculum&quot;]</i>:
+          </p>
           <input
             type="radio"
             value="Vinculum"
@@ -106,14 +114,15 @@ function App() {
             onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
             checked
           />{' '}
-          Vinculum
+          Vinculum <i>(ex. 1234 =&gt; I^ CC XXX IV)</i>
+          <br />
           <input
             type="radio"
             value="Apostrophus"
             name="system"
             onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
           />{' '}
-          Apostrophus
+          Apostrophus <i>(ex. 1234 =&gt; M CC XXX IV)</i>
         </div>
         <button className="button-action" onClick={handleClick} disabled={!input}>
           Convert
