@@ -13,13 +13,20 @@ function App() {
   const [system, setSystem] = useState<SystemTypes>('Vinculum');
 
   const handleRadioValueChange = (value: SystemTypes): void => {
+    console.log('value on system change: ', value);
+    console.log('system before system change: ', system);
+
     setSystem(value);
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>): void => {
+    console.log('system before handleChangeInput: ', system);
+
     const inputValue = e.target.value;
     const parsedInput = inputValue !== '' ? parseInt(inputValue) : null; // Parse input or set to null if empty
     setInput(parsedInput);
+
+    console.log('system after handleChangeInput: ', system);
   };
 
   const handleClick = () => {
@@ -51,18 +58,19 @@ function App() {
           </p>
           <input
             type="radio"
-            value="Vinculum"
+            value="Vinculum" // This value should be 'Vinculum', not a string
             name="system"
-            onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
-            checked
+            onChange={() => handleRadioValueChange('Vinculum')}
+            checked={system === 'Vinculum'}
           />{' '}
           Vinculum <i>(ex. 1234 =&gt; IV^ C XX V)</i>
           <br />
           <input
             type="radio"
-            value="Apostrophus"
+            value="Apostrophus" // This value should be 'Apostrophus', not a string
             name="system"
-            onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
+            onChange={() => handleRadioValueChange('Apostrophus')}
+            checked={system === 'Apostrophus'}
           />{' '}
           Apostrophus <i>(ex. 4234 =&gt; CIↃIↃↃ C XX V)</i>
         </div>

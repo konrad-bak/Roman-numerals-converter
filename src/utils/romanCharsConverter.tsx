@@ -45,7 +45,7 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
         // thousands (up to 3)
         resultString = 'M'.repeat(currNumber) + ' ' + resultString;
       }
-    } else if (system === 'Apostrophus') {
+    } else if (system === 'Vinculum') {
       // Large numbers (over 3999) - Vinculum System
       // TODO: VINCULUM SYS
     } else {
