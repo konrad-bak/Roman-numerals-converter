@@ -4,10 +4,11 @@ import React, { ChangeEvent, useState } from 'react';
 
 import romanCharsConverter from './utils/romanCharsConverter';
 
-type SystemTypes = 'Vinculum' | 'Apostrophus';
+export type SystemTypes = 'Vinculum' | 'Apostrophus';
 
 function App() {
-  const [input, setInput] = useState<number>();
+  const [input, setInput] = useState<number | null>(null);
+  const [submittedInput, setSubmittedInput] = useState<number | null>(null);
   const [result, setResult] = useState<string>('');
   const [system, setSystem] = useState<SystemTypes>('Vinculum');
 
@@ -16,79 +17,15 @@ function App() {
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>): void => {
-    setInput(parseInt(e.target.value));
+    const inputValue = e.target.value;
+    const parsedInput = inputValue !== '' ? parseInt(inputValue) : null; // Parse input or set to null if empty
+    setInput(parsedInput);
   };
 
   const handleClick = () => {
-    if (input) {
-      const numbersArr = input?.toString().split('');
-      const arrLength = numbersArr.length;
-      const isLarge = input > 3999 ? true : false;
-
-      let resultString = '';
-
-      for (let i = 0; i <= arrLength - 1; i++) {
-        const currArrPos = arrLength - 1 - i;
-        const currNumber = parseInt(numbersArr[currArrPos]);
-        console.log(currNumber);
-
-        let currSingularChar = '';
-        let currHalfChar = '';
-        let currTenChar = '';
-
-        if (i <= 2) {
-          if (i === 0) {
-            //singular numerals
-            currSingularChar = 'I';
-            currHalfChar = 'V';
-            currTenChar = 'X';
-          } else if (i === 1) {
-            // tens
-            currSingularChar = 'X';
-            currHalfChar = 'L';
-            currTenChar = 'C';
-          } else if (i === 2) {
-            // hundos
-            currSingularChar = 'C';
-            currHalfChar = 'D';
-            currTenChar = 'M';
-          }
-          const currRomanChars = romanCharsConverter(
-            currNumber,
-            currSingularChar,
-            currHalfChar,
-            currTenChar,
-          );
-          resultString = currRomanChars + resultString;
-        } else if (!isLarge) {
-          if (i === 3) {
-            // thousands (up to 3)
-            resultString = 'M'.repeat(currNumber) + ' ' + resultString;
-          }
-        } else {
-          // thousands (over 3999)
-
-          if (i === 3) {
-            resultString = ' ' + resultString;
-          }
-          const multiplier = i - 2;
-
-          currSingularChar = 'C'.repeat(multiplier) + 'I' + 'Ↄ'.repeat(multiplier);
-          currHalfChar = 'I' + 'Ↄ'.repeat(multiplier + 1);
-          currTenChar = 'C'.repeat(multiplier + 1) + 'I' + 'Ↄ'.repeat(multiplier + 1);
-
-          const currRomanChars = romanCharsConverter(
-            currNumber,
-            currSingularChar,
-            currHalfChar,
-            currTenChar,
-          );
-          resultString = currRomanChars + resultString;
-        }
-        resultString = ' ' + resultString;
-      }
-
-      setResult(resultString);
+    if (input != null) {
+      setSubmittedInput(input);
+      setResult(romanCharsConverter(input, system));
     }
   };
 
@@ -97,7 +34,12 @@ function App() {
       <div>
         <h1>Convert to Roman numerals</h1>
         <p>Please input number:</p>
-        <input value={input} onChange={handleChangeInput} type="number" />
+        <input
+          value={input !== null ? input : ''}
+          onChange={handleChangeInput}
+          onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+          type="number"
+        />
         <br />
         <div className="systems">
           <p>
@@ -114,7 +56,7 @@ function App() {
             onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
             checked
           />{' '}
-          Vinculum <i>(ex. 1234 =&gt; I^ CC XXX IV)</i>
+          Vinculum <i>(ex. 1234 =&gt; IV^ C XX V)</i>
           <br />
           <input
             type="radio"
@@ -122,11 +64,14 @@ function App() {
             name="system"
             onChange={(e) => handleRadioValueChange(e.target.value as SystemTypes)}
           />{' '}
-          Apostrophus <i>(ex. 1234 =&gt; M CC XXX IV)</i>
+          Apostrophus <i>(ex. 4234 =&gt; CIↃIↃↃ C XX V)</i>
         </div>
         <button className="button-action" onClick={handleClick} disabled={!input}>
           Convert
         </button>
+        <p className="result">
+          Submitted number: <span>{submittedInput}</span>
+        </p>
         <p className="result">
           Result: <span>{result}</span>
         </p>

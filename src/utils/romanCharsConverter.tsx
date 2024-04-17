@@ -1,44 +1,74 @@
-// Convert individual number to roman numeral
+import { SystemTypes } from '../App';
+import individualRomanCharConverter from './individualRomanCharConverter';
 
-const romanCharsConverter = (
-  currNumber: number,
-  currSingularChar: string,
-  currHalfChar: string,
-  currTenChar: string,
-) => {
+const romanCharsConverter = (input: number, system: SystemTypes) => {
+  const numbersArr = input?.toString().split('');
+  const arrLength = numbersArr.length;
+  const isLarge = input > 3999 ? true : false;
+
   let resultString = '';
-  switch (currNumber) {
-    case 0:
-      break;
-    case 1:
-      resultString += currSingularChar;
-      break;
-    case 2:
-      resultString += currSingularChar.repeat(2);
-      break;
-    case 3:
-      resultString += currSingularChar.repeat(3);
-      break;
-    case 4:
-      resultString += currSingularChar + currHalfChar;
-      break;
-    case 5:
-      resultString += currHalfChar;
-      break;
-    case 6:
-      resultString += currHalfChar + currSingularChar;
-      break;
-    case 7:
-      resultString += currHalfChar + currSingularChar.repeat(2);
-      break;
-    case 8:
-      resultString += currHalfChar + currSingularChar.repeat(3);
-      break;
-    case 9:
-      resultString += currSingularChar + currTenChar;
-      break;
-    default:
-      console.log('Error on first number');
+
+  for (let i = 0; i <= arrLength - 1; i++) {
+    const currArrPos = arrLength - 1 - i;
+    const currNumber = parseInt(numbersArr[currArrPos]);
+
+    let currSingularChar = '';
+    let currHalfChar = '';
+    let currTenChar = '';
+
+    if (i <= 2) {
+      if (i === 0) {
+        //singular numerals
+        currSingularChar = 'I';
+        currHalfChar = 'V';
+        currTenChar = 'X';
+      } else if (i === 1) {
+        // tens
+        currSingularChar = 'X';
+        currHalfChar = 'L';
+        currTenChar = 'C';
+      } else if (i === 2) {
+        // hundos
+        currSingularChar = 'C';
+        currHalfChar = 'D';
+        currTenChar = 'M';
+      }
+      const currRomanChars = individualRomanCharConverter(
+        currNumber,
+        currSingularChar,
+        currHalfChar,
+        currTenChar,
+      );
+      resultString = currRomanChars + resultString;
+    } else if (!isLarge) {
+      if (i === 3) {
+        // thousands (up to 3)
+        resultString = 'M'.repeat(currNumber) + ' ' + resultString;
+      }
+    } else if (system === 'Apostrophus') {
+      // Large numbers (over 3999) - Vinculum System
+      // TODO: VINCULUM SYS
+    } else {
+      // Large numbers (over 3999) - Apostrophus System
+
+      if (i === 3) {
+        resultString = ' ' + resultString;
+      }
+      const multiplier = i - 2;
+
+      currSingularChar = 'C'.repeat(multiplier) + 'I' + 'Ↄ'.repeat(multiplier);
+      currHalfChar = 'I' + 'Ↄ'.repeat(multiplier + 1);
+      currTenChar = 'C'.repeat(multiplier + 1) + 'I' + 'Ↄ'.repeat(multiplier + 1);
+
+      const currRomanChars = individualRomanCharConverter(
+        currNumber,
+        currSingularChar,
+        currHalfChar,
+        currTenChar,
+      );
+      resultString = currRomanChars + resultString;
+    }
+    resultString = ' ' + resultString;
   }
 
   return resultString;
