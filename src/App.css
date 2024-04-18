@@ -81,6 +81,10 @@ button {
   font-weight: bold;
 }
 
+span.red {
+  color: red;
+}
+
 button.button-action {
   margin-top: 20px;
 }

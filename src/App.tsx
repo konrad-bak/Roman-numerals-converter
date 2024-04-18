@@ -11,27 +11,23 @@ function App() {
   const [submittedInput, setSubmittedInput] = useState<number | null>(null);
   const [result, setResult] = useState<string>('');
   const [system, setSystem] = useState<SystemTypes>('Vinculum');
+  const [tooBig, setTooBig] = useState<boolean>(false);
 
   const handleRadioValueChange = (value: SystemTypes): void => {
-    console.log('value on system change: ', value);
-    console.log('system before system change: ', system);
-
     setSystem(value);
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>): void => {
-    console.log('system before handleChangeInput: ', system);
-
     const inputValue = e.target.value;
     const parsedInput = inputValue !== '' ? parseInt(inputValue) : null; // Parse input or set to null if empty
     setInput(parsedInput);
-
-    console.log('system after handleChangeInput: ', system);
   };
 
   const handleClick = () => {
     if (input != null) {
       setSubmittedInput(input);
+      input > 3999999999 ? setTooBig(true) : setTooBig(false);
+
       setResult(romanCharsConverter(input, system));
     }
   };
@@ -72,7 +68,7 @@ function App() {
             onChange={() => handleRadioValueChange('Apostrophus')}
             checked={system === 'Apostrophus'}
           />{' '}
-          Apostrophus <i>(ex. 4234 =&gt; CIↃIↃↃ C XX V)</i>
+          Apostrophus <i>(ex. 4234 =&gt; ↀↁ CC XXX IV)</i>
         </div>
         <button className="button-action" onClick={handleClick} disabled={!input}>
           Convert
@@ -81,7 +77,7 @@ function App() {
           Submitted number: <span>{submittedInput}</span>
         </p>
         <p className="result">
-          Result: <span>{result}</span>
+          Result: <span className={tooBig ? 'red' : ''}>{result}</span>
         </p>
       </div>
       <hr />
@@ -210,7 +206,15 @@ function App() {
             rel="noreferrer"
           >
             Wikipedia article
-          </a>
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://www.tuomas.salste.net/doc/roman/converter.shtml"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Tuomas Salste
+          </a>{' '}
         </p>
       </div>
     </div>

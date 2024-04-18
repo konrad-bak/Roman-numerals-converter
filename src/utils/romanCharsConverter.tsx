@@ -56,10 +56,19 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
         resultString = ' ' + resultString;
       }
       const multiplier = i - 2;
-
-      currSingularChar = 'C'.repeat(multiplier) + 'I' + 'Ↄ'.repeat(multiplier);
-      currHalfChar = 'I' + 'Ↄ'.repeat(multiplier + 1);
-      currTenChar = 'C'.repeat(multiplier + 1) + 'I' + 'Ↄ'.repeat(multiplier + 1);
+      if (multiplier === 1) {
+        currSingularChar = 'ↀ';
+        currHalfChar = 'ↁ';
+        currTenChar = 'ↂ';
+      } else if (multiplier === 2) {
+        currSingularChar = 'ↂ';
+        currHalfChar = 'ↇ';
+        currTenChar = 'ↈ';
+      } else {
+        currSingularChar = 'C'.repeat(multiplier) + 'I' + 'Ↄ'.repeat(multiplier);
+        currHalfChar = 'I' + 'Ↄ'.repeat(multiplier + 1);
+        currTenChar = 'C'.repeat(multiplier + 1) + 'I' + 'Ↄ'.repeat(multiplier + 1);
+      }
 
       const currRomanChars = individualRomanCharConverter(
         currNumber,
