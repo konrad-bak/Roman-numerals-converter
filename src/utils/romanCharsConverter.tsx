@@ -46,38 +46,42 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
         // thousands (up to 3)
         resultString = 'M'.repeat(currNumber) + ' ' + resultString;
       }
-    } else if (system === 'Vinculum') {
-      // Large numbers (over 3999) - Vinculum System
-      // TODO: VINCULUM SYS
     } else {
-      // Large numbers (over 3999) - Apostrophus System
-
+      const multiplier = i - 2;
       if (i === 3) {
         resultString = ' ' + resultString;
       }
-      const multiplier = i - 2;
-      if (multiplier === 1) {
-        currSingularChar = 'ↀ';
-        currHalfChar = 'ↁ';
-        currTenChar = 'ↂ';
-      } else if (multiplier === 2) {
-        currSingularChar = 'ↂ';
-        currHalfChar = 'ↇ';
-        currTenChar = 'ↈ';
-      } else {
-        currSingularChar = 'C'.repeat(multiplier) + 'I' + 'Ↄ'.repeat(multiplier);
-        currHalfChar = 'I' + 'Ↄ'.repeat(multiplier + 1);
-        currTenChar = 'C'.repeat(multiplier + 1) + 'I' + 'Ↄ'.repeat(multiplier + 1);
-      }
 
-      const currRomanChars = individualRomanCharConverter(
-        currNumber,
-        currSingularChar,
-        currHalfChar,
-        currTenChar,
-      );
-      resultString = currRomanChars + resultString;
+      if (system === 'Vinculum') {
+        // Large numbers (over 3999) - Vinculum System
+        // TODO: VINCULUM SYS
+      } else {
+        // Large numbers (over 3999) - Apostrophus System
+
+        if (multiplier === 1) {
+          currSingularChar = 'ↀ';
+          currHalfChar = 'ↁ';
+          currTenChar = 'ↂ';
+        } else if (multiplier === 2) {
+          currSingularChar = 'ↂ';
+          currHalfChar = 'ↇ';
+          currTenChar = 'ↈ';
+        } else {
+          currSingularChar = 'C'.repeat(multiplier) + 'I' + 'Ↄ'.repeat(multiplier);
+          currHalfChar = 'I' + 'Ↄ'.repeat(multiplier + 1);
+          currTenChar = 'C'.repeat(multiplier + 1) + 'I' + 'Ↄ'.repeat(multiplier + 1);
+        }
+
+        const currRomanChars = individualRomanCharConverter(
+          currNumber,
+          currSingularChar,
+          currHalfChar,
+          currTenChar,
+        );
+        resultString = currRomanChars + resultString;
+      }
     }
+
     resultString = ' ' + resultString;
   }
 
