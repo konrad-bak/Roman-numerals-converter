@@ -16,6 +16,7 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
     let currHalfChar = '';
     let currTenChar = '';
 
+    if (input > 3999999999) return (resultString = 'Too big (over 3,999,999,999)');
     if (i <= 2) {
       if (i === 0) {
         //singular numerals
