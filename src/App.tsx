@@ -59,7 +59,10 @@ function App() {
             onChange={() => handleRadioValueChange('Vinculum')}
             checked={system === 'Vinculum'}
           />{' '}
-          Vinculum <i>(ex. 1234 =&gt; IV^ C XX V)</i>
+          Vinculum{' '}
+          <i>
+            (ex. 4234 =&gt; <span className="top-line">IV</span> CC XXX IV)
+          </i>
           <br />
           <input
             type="radio"

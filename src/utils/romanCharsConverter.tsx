@@ -138,11 +138,9 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
           currHalfChar,
           currTenChar,
         );
-        resultString = currRomanChars + resultString;
+        resultString = currRomanChars + ' ' + resultString;
       }
     }
-
-    // resultString = ' ' + resultString;
   }
 
   return resultString;
