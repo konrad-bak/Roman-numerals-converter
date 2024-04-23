@@ -6,11 +6,12 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
   const arrLength = numbersArr.length;
   const isLarge = input > 3999 ? true : false;
 
-  let resultString = '';
+  let resultString: string | React.ReactElement = '';
 
   for (let i = 0; i <= arrLength - 1; i++) {
     const currArrPos = arrLength - 1 - i;
     const currNumber = parseInt(numbersArr[currArrPos]);
+    if (currNumber === 0) continue;
 
     let currSingularChar = '';
     let currHalfChar = '';
@@ -47,16 +48,75 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
         resultString = 'M'.repeat(currNumber) + ' ' + resultString;
       }
     } else {
-      const multiplier = i - 2;
       if (i === 3) {
         resultString = ' ' + resultString;
       }
 
       if (system === 'Vinculum') {
         // Large numbers (over 3999) - Vinculum System
-        // TODO: VINCULUM SYS
+        let lineClass = 'top-line';
+
+        if (i < 9) {
+          if (i === 3) {
+            //singular numerals
+            currSingularChar = 'I';
+            currHalfChar = 'V';
+            currTenChar = 'X';
+          } else if (i === 4) {
+            // tens
+            currSingularChar = 'X';
+            currHalfChar = 'L';
+            currTenChar = 'C';
+          } else if (i === 5) {
+            // hundos
+            currSingularChar = 'C';
+            currHalfChar = 'D';
+            currTenChar = 'M';
+          } else if (i >= 6) {
+            lineClass = 'top-line-double';
+            if (i === 6) {
+              // thundos (single numerals with double line)
+              currSingularChar = 'I';
+              currHalfChar = 'V';
+              currTenChar = 'X';
+            } else if (i === 7) {
+              // tens thundos (with double line)
+              currSingularChar = 'X';
+              currHalfChar = 'L';
+              currTenChar = 'C';
+            } else if (i === 8) {
+              // hundos thundos (with double line)
+              currSingularChar = 'C';
+              currHalfChar = 'D';
+              currTenChar = 'M';
+            }
+          }
+
+          const currRomanChars = individualRomanCharConverter(
+            currNumber,
+            currSingularChar,
+            currHalfChar,
+            currTenChar,
+          );
+
+          resultString = (
+            <>
+              <span className={lineClass}>{currRomanChars}</span>
+              {resultString}
+            </>
+          );
+        } else {
+          lineClass = 'top-line-double';
+          resultString = (
+            <>
+              <span className={lineClass}>{'M'.repeat(currNumber)}</span>
+              {resultString}
+            </>
+          );
+        }
       } else {
         // Large numbers (over 3999) - Apostrophus System
+        const multiplier = i - 2;
 
         if (multiplier === 1) {
           currSingularChar = 'ↀ';
@@ -82,7 +142,7 @@ const romanCharsConverter = (input: number, system: SystemTypes) => {
       }
     }
 
-    resultString = ' ' + resultString;
+    // resultString = ' ' + resultString;
   }
 
   return resultString;

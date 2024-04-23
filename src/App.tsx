@@ -9,7 +9,7 @@ export type SystemTypes = 'Vinculum' | 'Apostrophus';
 function App() {
   const [input, setInput] = useState<number | null>(null);
   const [submittedInput, setSubmittedInput] = useState<number | null>(null);
-  const [result, setResult] = useState<string>('');
+  const [result, setResult] = useState<string | React.ReactElement>('');
   const [system, setSystem] = useState<SystemTypes>('Vinculum');
   const [tooBig, setTooBig] = useState<boolean>(false);
 
