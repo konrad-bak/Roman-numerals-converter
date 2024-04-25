@@ -2,6 +2,7 @@ import './App.css';
 
 import React, { ChangeEvent, useState } from 'react';
 
+import { Note } from './components/Note';
 import romanCharsConverter from './utils/romanCharsConverter';
 
 export type SystemTypes = 'Vinculum' | 'Apostrophus';
@@ -84,142 +85,7 @@ function App() {
         </p>
       </div>
       <hr />
-      <div className="note">
-        <h2>Note</h2>
-        <p>For numbers up to 3999, we Romans generally used:</p>
-        <table className="table">
-          <caption>Individual decimal places</caption>
-          <tbody>
-            <tr>
-              <th></th>
-              <th>Thousands</th>
-              <th>Hundreds</th>
-              <th>Tens</th>
-              <th>Units</th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>M</td>
-              <td>C</td>
-              <td>X</td>
-              <td>I</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>MM</td>
-              <td>CC</td>
-              <td>XX</td>
-              <td>II</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>MMM</td>
-              <td>CCC</td>
-              <td>XXX</td>
-              <td>III</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td></td>
-              <td>CD</td>
-              <td>XL</td>
-              <td>IV</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td></td>
-              <td>D</td>
-              <td>L</td>
-              <td>V</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td></td>
-              <td>DC</td>
-              <td>LX</td>
-              <td>VI</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td></td>
-              <td>DCC</td>
-              <td>LXX</td>
-              <td>VII</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td></td>
-              <td>DCCC</td>
-              <td>LXXX</td>
-              <td>VIII</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td></td>
-              <td>CM</td>
-              <td>XC</td>
-              <td>IX</td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
-        <br />
-        <p>
-          But when numbers exceeded that, it was nessesary to invent some simplification.
-          It was nessesary to avoid adding more letters to system or ending up with
-          something like that:
-        </p>
-        <p>
-          <i>{'15486 => MMMMMMMMMMMMMMMCDLXXXVI'}</i>
-        </p>
-        <p>
-          One of the working solutions, that Romans have developed, is <i>Apostrophus</i>:
-        </p>
-        <p>
-          {`Using the apostrophus method, 500 is written as IↃ, while 1,000 is written as CIↃ. This system of encasing numbers to denote thousands (imagine the Cs and Ↄs as parentheses) had its origins in Etruscan numeral usage.
-
-          Each additional set of C and Ↄ surrounding CIↃ raises the value by a factor of ten: CCIↃↃ represents 10,000 and CCCIↃↃↃ represents 100,000. Similarly, each additional Ↄ to the right of IↃ raises the value by a factor of ten: IↃↃ represents 5,000 and IↃↃↃ represents 50,000. Numerals larger than CCCIↃↃↃ do not occur.`}
-        </p>
-
-        <p>
-          This topic extends in the wikipedia article, but for simplicity I&apos;ve
-          handled larger numbers in this manner:
-        </p>
-
-        <ul className="list">
-          <li>
-            <b>IↃ</b> = 500
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <b>CIↃ</b> = 1,000
-          </li>
-          <li>
-            <b>IↃↃ</b> = 5,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <b>CCIↃↃ</b> = 10,000
-          </li>
-          <li>
-            <b>IↃↃↃ</b> = 50,000 &nbsp;&nbsp;&nbsp;&nbsp;<b>CCCIↃↃↃ</b> = 100,000
-          </li>
-        </ul>
-
-        <p>
-          All info and descriptions come from{' '}
-          <a
-            href="https://en.wikipedia.org/wiki/Roman_numerals"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Wikipedia article
-          </a>{' '}
-          and{' '}
-          <a
-            href="https://www.tuomas.salste.net/doc/roman/converter.shtml"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Tuomas Salste
-          </a>{' '}
-        </p>
-      </div>
+      <Note />
     </div>
   );
 }
