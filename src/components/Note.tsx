@@ -130,9 +130,9 @@ export const Note = () => {
       <h3>Vinculum</h3>
 
       <p>
-        This system came to use in late Roman Republic and continued into Middle Ages. It
+        {`This system came to use in late Roman Republic and continued into Middle Ages. It
         vastly simplified handling larger numbers by putting bars, or "overlines" at the
-        top of numbers, indicating multiplication by x1000:
+        top of numbers, indicating multiplication by x1000:`}
       </p>
 
       <div className="system-example-grid">
