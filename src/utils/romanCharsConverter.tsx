@@ -62,7 +62,7 @@ const processLargeNumberApostrophus = (
   resultString: string | React.ReactElement,
 ): string => {
   const multiplier = position - 2;
-  const [singular, half, ten] = getLargeRomanCharacters(position, multiplier);
+  const [singular, half, ten] = getLargeRomanCharacters(multiplier);
   const currRomanChars = individualRomanCharConverter(currNumber, singular, half, ten);
 
   return currRomanChars + ' ' + resultString;

@@ -5,40 +5,26 @@ const individualRomanCharConverter = (
   currSingularChar: string,
   currHalfChar: string,
   currTenChar: string,
-) => {
+): string => {
   let resultString = '';
-  switch (currNumber) {
-    case 0:
-      break;
-    case 1:
-      resultString += currSingularChar;
-      break;
-    case 2:
-      resultString += currSingularChar.repeat(2);
-      break;
-    case 3:
-      resultString += currSingularChar.repeat(3);
-      break;
-    case 4:
-      resultString += currSingularChar + currHalfChar;
-      break;
-    case 5:
-      resultString += currHalfChar;
-      break;
-    case 6:
-      resultString += currHalfChar + currSingularChar;
-      break;
-    case 7:
-      resultString += currHalfChar + currSingularChar.repeat(2);
-      break;
-    case 8:
-      resultString += currHalfChar + currSingularChar.repeat(3);
-      break;
-    case 9:
-      resultString += currSingularChar + currTenChar;
-      break;
-    default:
-      console.log('Error on first number');
+
+  const romanNumerals: { [key: number]: string } = {
+    0: '',
+    1: currSingularChar,
+    2: currSingularChar.repeat(2),
+    3: currSingularChar.repeat(3),
+    4: currSingularChar + currHalfChar,
+    5: currHalfChar,
+    6: currHalfChar + currSingularChar,
+    7: currHalfChar + currSingularChar.repeat(2),
+    8: currHalfChar + currSingularChar.repeat(3),
+    9: currSingularChar + currTenChar,
+  };
+
+  resultString = romanNumerals[currNumber] ?? '';
+
+  if (resultString === '') {
+    console.error('Error on first number');
   }
 
   return resultString;
