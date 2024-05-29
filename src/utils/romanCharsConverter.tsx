@@ -5,7 +5,7 @@ const MAX_SMALL_NUMBER = 3999;
 const MAX_NUMBER = 3999999999;
 const TOO_BIG_MESSAGE = 'Too big (over 3,999,999,999)';
 
-const getRomanCharacters = (position: number) => {
+const getRomanCharacters = (position: number): [string, string, string] => {
   switch (position) {
     case 0:
       return ['I', 'V', 'X'];
@@ -14,11 +14,11 @@ const getRomanCharacters = (position: number) => {
     case 2:
       return ['C', 'D', 'M'];
     default:
-      return [];
+      return ['', '', ''];
   }
 };
 
-const getLargeRomanCharacters = (multiplier: number) => {
+const getLargeRomanCharacters = (multiplier: number): [string, string, string] => {
   if (multiplier === 1) return ['ↀ', 'ↁ', 'ↂ'];
   if (multiplier === 2) return ['ↂ', 'ↇ', 'ↈ'];
 
@@ -33,7 +33,7 @@ const processSmallNumber = (
   currNumber: number,
   position: number,
   resultString: string | React.ReactElement,
-) => {
+): string => {
   const [singular, half, ten] = getRomanCharacters(position);
   const currRomanChars = individualRomanCharConverter(currNumber, singular, half, ten);
   return currRomanChars + resultString;
@@ -43,7 +43,7 @@ const processLargeNumberVinculum = (
   currNumber: number,
   position: number,
   resultString: string | React.ReactElement,
-) => {
+): React.ReactElement => {
   const [singular, half, ten] = getRomanCharacters(position % 3);
   const lineClass = position >= 6 ? 'top-line-double' : 'top-line';
   const currRomanChars = individualRomanCharConverter(currNumber, singular, half, ten);
@@ -60,15 +60,18 @@ const processLargeNumberApostrophus = (
   currNumber: number,
   position: number,
   resultString: string | React.ReactElement,
-) => {
+): string => {
   const multiplier = position - 2;
-  const [singular, half, ten] = getLargeRomanCharacters(multiplier);
+  const [singular, half, ten] = getLargeRomanCharacters(position, multiplier);
   const currRomanChars = individualRomanCharConverter(currNumber, singular, half, ten);
 
   return currRomanChars + ' ' + resultString;
 };
 
-const romanCharsConverter = (input: number, system: SystemTypes) => {
+const romanCharsConverter = (
+  input: number,
+  system: SystemTypes,
+): string | React.ReactElement => {
   if (input > MAX_NUMBER) return TOO_BIG_MESSAGE;
 
   const numbersArr = input.toString().split('');
