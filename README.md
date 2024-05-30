@@ -1,37 +1,137 @@
-# Vite + React + Typescript + Eslint + Prettier
+# Roman Numerals Converter
 
-A starter for React with Typescript with the fast Vite and all static code testing with Eslint and formatting with Prettier.
+One day this will end up as another js npm lib.
+For now \*\*to use this library, simply clone the git repository.
 
-![Vite + React + Typescript + Eslint + Prettier](/resources/screenshot.png)
+---
 
-I found out about Vite and I wanted to have a boilerplate for the technologies that I use. You can find more about these in the following links: [Vite](https://github.com/vitejs/vite), [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Eslint](https://eslint.org/), [Prettier](https://prettier.io/).
+# Roman Numerals Converter Library
+
+## Overview
+
+This library provides functionality to convert numbers into Roman numerals using different systems, including the standard system and the Vinculum/Apostrophus system for large numbers.
 
 ## Installation
 
-Clone the repo and run `yarn install`
+To install the library, you can use npm or yarn:
 
-or Run command
-
-```
-npx degit TheSwordBreaker/vite-reactts-eslint-prettier project-name
+```bash
+ npm install roman-numerals-converter
 ```
 
-## Start
+or
 
-After the successfull installation of the packages: `yarn dev`
+```bash
+ yarn add roman-numerals-converter
+```
 
-## Steps in Vscode
+## Usage
 
-#### (works with better with this template)
+### Importing the Converter
 
-1. Install Eslint and prettier extension for vs code.
-2. Make Sure Both are enabled
-3. Make sure all packages are Installed. (Mostly Eslint and prettier in node_modules)
-4. Enable formatOnSave of vs code
-5. Open a .tsx file and check if the bottom right corners of vs code have Eslint and Prettier with a double tick
+First, import the romanCharsConverter function into your project:
 
-![Screenshot (253)_LI](https://user-images.githubusercontent.com/52120562/162486286-7383a737-d555-4f9b-a4dd-c4a81deb7b96.jpg)
+```typescript
+import romanCharsConverter, { SystemTypes } from 'roman-numerals-converter';
+```
 
-If Everything is Good Then It Should Work, but let me new if something else happens
+### Converting Numbers
 
-Made with ❤️ by theSwordBreaker(we Destory all types of sword ⚡)
+You can convert a number to Roman numerals by calling the romanCharsConverter function. The function takes two arguments: the number to convert and the system type ('Vinculum' or 'Apostrophus').
+
+```typescript
+const number = 1234;
+const system: SystemTypes = 'Vinculum'; // or 'Apostrophus'
+
+const romanNumeral = romanCharsConverter(number, system);
+console.log(romanNumeral); // Output: "MCCXXXIV"
+```
+
+Full example:
+
+```typescript
+import romanCharsConverter from 'roman-numerals-converter';
+import { SystemTypes } from './path-to-your-app-types';
+
+const number = 52000;
+const system: SystemTypes = 'Apostrophus';
+
+const romanNumeral = romanCharsConverter(number, system);
+console.log(romanNumeral); // Output: "ↇ ↀↀ"
+```
+
+## API
+
+**`romanCharsConverter(input: number, system: SystemTypes): string | React.ReactElement`**
+
+Converts a number to a Roman numeral string or a React element if using the Vinculum system.
+
+- `input`: The number to convert.
+- `system`: The numeral system to use ('Vinculum' or 'Apostrophus').
+
+**`individualRomanCharConverter(currNumber: number, currSingularChar: string, currHalfChar: string, currTenChar: string): string`**
+
+Converts an individual number to a Roman numeral string.
+
+- `currNumber`: The current number to convert (0-9).
+- `currSingularChar`: The character representing the singular value (e.g., 'I').
+- `currHalfChar`: The character representing the half value (e.g., 'V').
+- `currTenChar`: The character representing the ten value (e.g., 'X').
+
+### Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+### License
+
+This project is licensed under the MIT License.
+
+---
+
+## Note
+
+For numbers up to 3999, we Romans generally used:
+| Individual decimal places |
+| ----------------------------------- |
+
+|     | Thousands | Hundreds | Tens | Units |
+| --- | --------- | -------- | ---- | ----- |
+| 1   | M         | C        | X    | I     |
+| 2   | MM        | CC       | XX   | II    |
+| 3   | MMM       | CCC      | XXX  | III   |
+| 4   |           | CD       | XL   | IV    |
+| 5   |           | D        | L    | V     |
+| 6   |           | DC       | LX   | VI    |
+| 7   |           | DCC      | LXX  | VII   |
+| 8   |           | DCCC     | LXXX | VIII  |
+| 9   |           | CM       | XC   | IX    |
+
+But when numbers exceeded that, it was nessesary to invent some simplification.
+It was nessesary to avoid adding more letters to system or ending up with something like that:
+
+_15486 => MMMMMMMMMMMMMMMCDLXXXVI_
+
+### Apostrophus
+
+One of the working solutions, that Romans have developed, is **Apostrophus**:
+
+Using the apostrophus method, 500 is written as IↃ, while 1,000 is written as CIↃ. This system of encasing numbers to denote thousands (imagine the Cs and Ↄs as parentheses) had its origins in Etruscan numeral usage.
+
+Each additional set of C and Ↄ surrounding CIↃ raises the value by a factor of ten: CCIↃↃ represents 10,000 and CCCIↃↃↃ represents 100,000. Similarly, each additional Ↄ to the right of IↃ raises the value by a factor of ten: IↃↃ represents 5,000 and IↃↃↃ represents 50,000. Numerals larger than CCCIↃↃↃ do not occur.
+
+This topic extends in the wikipedia article, but for simplicity I've handled larger numbers in this manner:
+
+|                           |                               |
+| ------------------------- | ----------------------------- |
+| **IↃ** = **D** = 500      | **CIↃ** = **ↀ** = 1,000       |
+| **IↃↃ** = **ↁ** = 5,000   | **CCIↃↃ** = **ↂ** = 10,000    |
+| **IↃↃↃ** = **ↇ** = 50,000 | **CCCIↃↃↃ** = **ↈ** = 100,000 |
+
+### Vinculum
+
+This system came to use in late Roman Republic and continued into Middle Ages.
+It vastly simplified handling larger numbers by putting bars, or "overlines" at the top of numbers, indicating multiplication by x1000:
+
+![alt text](resources/image.png)
+
+All info and descriptions come from, or are based of [Wikipedia article](https://en.wikipedia.org/wiki/Roman_numerals) and [Tuomas Salste](https://www.tuomas.salste.net/doc/roman/converter.shtml)
