@@ -1,7 +1,7 @@
 # Roman Numerals Converter
 
 One day this will end up as another js npm lib.
-For now \*\*to use this library, simply clone the git repository.
+For now **to use this library, simply clone the git repository.**
 
 ---
 
