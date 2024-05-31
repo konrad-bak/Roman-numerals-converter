@@ -44,7 +44,13 @@ const processLargeNumberVinculum = (
   position: number,
   resultString: string | React.ReactElement,
 ): React.ReactElement => {
-  const [singular, half, ten] = getRomanCharacters(position % 3);
+  let singular, half, ten;
+  if ((position === 6 || position === 9) && currNumber < 4) {
+    singular = 'M';
+    [half, ten] = getRomanCharacters(position % 3);
+  } else {
+    [singular, half, ten] = getRomanCharacters(position % 3);
+  }
   const lineClass = position >= 6 ? 'top-line-double' : 'top-line';
   const currRomanChars = individualRomanCharConverter(currNumber, singular, half, ten);
 
