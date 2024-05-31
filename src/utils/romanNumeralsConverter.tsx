@@ -18,7 +18,7 @@ const getRomanCharacters = (position: number): [string, string, string] => {
   }
 };
 
-const getLargeRomanCharacters = (multiplier: number): [string, string, string] => {
+const getApostrophusCharacters = (multiplier: number): [string, string, string] => {
   if (multiplier === 1) return ['ↀ', 'ↁ', 'ↂ'];
   if (multiplier === 2) return ['ↂ', 'ↇ', 'ↈ'];
 
@@ -62,13 +62,13 @@ const processLargeNumberApostrophus = (
   resultString: string | React.ReactElement,
 ): string => {
   const multiplier = position - 2;
-  const [singular, half, ten] = getLargeRomanCharacters(multiplier);
+  const [singular, half, ten] = getApostrophusCharacters(multiplier);
   const currRomanChars = individualRomanCharConverter(currNumber, singular, half, ten);
 
   return currRomanChars + ' ' + resultString;
 };
 
-const romanCharsConverter = (
+const romanNumeralsConverter = (
   input: number,
   system: SystemTypes,
 ): string | React.ReactElement => {
@@ -103,4 +103,4 @@ const romanCharsConverter = (
   return resultString;
 };
 
-export default romanCharsConverter;
+export default romanNumeralsConverter;

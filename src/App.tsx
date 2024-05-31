@@ -3,7 +3,7 @@ import './App.css';
 import React, { ChangeEvent, useState } from 'react';
 
 import { Note } from './components/Note';
-import romanCharsConverter from './utils/romanCharsConverter';
+import romanNumeralsConverter from './utils/romanNumeralsConverter';
 
 export type SystemTypes = 'Vinculum' | 'Apostrophus';
 
@@ -29,7 +29,7 @@ function App() {
       setSubmittedInput(input);
       input > 3999999999 ? setTooBig(true) : setTooBig(false);
 
-      setResult(romanCharsConverter(input, system));
+      setResult(romanNumeralsConverter(input, system));
     }
   };
 
