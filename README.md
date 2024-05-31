@@ -3,6 +3,16 @@
 One day this will end up as another js npm lib.
 For now **to use this library, simply clone the git repository.**
 
+Even ChatGPT converts wrong!
+But this library gets you covered if you please to bring back the glorious Roman Empire Numerals!
+
+Example:
+
+![alt text](resources/Screenshot_2-roman-numerals-converter.jpg)
+
+ChatGPT attempt:
+![alt text](resources/Screenshot_1-chatgpt-roman-wrong.jpg)
+
 ---
 
 # Roman Numerals Converter Library
