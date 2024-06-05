@@ -8,8 +8,8 @@ const TOO_BIG_MESSAGE = 'Too big (over 3,999,999,999)';
 /**
  * Used in two parent functions {@link processSmallNumber} and {@link processLargeNumberVinculum}
  *
- * Takes position (currNumber position in the parent function) and returns an array of roman characters.
- * @param {number} position - a reverse position of the currNumber param in the original arabic number input (ex. 1)
+ * Takes ```position``` (```currNumber``` position in the parent function) and returns an array of roman characters.
+ * @param {number} position - a reverse position of the ```currNumber``` param in the original arabic number input (ex. 1)
  * @returns {[string, string, string]} array of characters in Apostrophus system (ex. ['X', 'L', 'C'])
  */
 const getRomanCharacters = (position: number): [string, string, string] => {
@@ -28,7 +28,7 @@ const getRomanCharacters = (position: number): [string, string, string] => {
 /**
  * Used in Apostrofus function {@link processLargeNumberApostrophus}
  *
- * Takes multiplier (which is calculated from currNumber position in the parent function) and returns an array of characters.
+ * Takes ```multiplier``` (which is calculated from ```currNumber``` position in the parent function) and returns an array of characters.
  * @param {number} multiplier - a number indicating current multiplier (ex. 2)
  * @returns {[string, string, string]} array of characters in Apostrophus system (ex. ['ↂ', 'ↇ', 'ↈ'])
  */
@@ -46,11 +46,11 @@ const getApostrophusCharacters = (multiplier: number): [string, string, string] 
 /**
  * Used in main function {@link romanNumeralsConverter}
  *
- * For numbers 999 and below, takes current single arabic numeral, its position in the whole number
- * and the current state of result roman conversion,
+ * For numbers 999 and below, takes current single arabic numeral(```currNumber```), its ```position``` in the whole number
+ * and the current state of result roman conversion(```resultString```),
  * then adds converted numeral to the roman result (in Vinculum system).
  * @param {number} currNumber - single arabic numeral to convert (ex. 5)
- * @param {number} position - reverse position of the currNumber param in the original arabic number input (ex. 1)
+ * @param {number} position - reverse position of the ```currNumber``` param in the original arabic number input (ex. 1)
  * @param {string | React.ReactElement} resultString - current state of converted roman numeral (ex. "I")
  * @returns {string | React.ReactElement} updated state of converted roman numeral (ex. "LI" from 51)
  */
@@ -67,11 +67,11 @@ const processSmallNumber = (
 /**
  * Used in main function {@link romanNumeralsConverter}
  *
- * For numbers above 3999, takes current single arabic numeral, its position in the whole number
- * and the current state of result roman conversion,
+ * For numbers above 3999, takes current single arabic numeral(```currNumber```), its position in the whole number
+ * and the current state of result roman conversion(```resultString```),
  * then adds converted numeral to the roman result (in Vinculum system).
  * @param {number} currNumber - single arabic numeral to convert (ex. 5)
- * @param {number} position - reverse position of the currNumber param in the original arabic number input (ex. 3)
+ * @param {number} position - reverse position of the ```currNumber``` param in the original arabic number input (ex. 3)
  * @param {string | React.ReactElement} resultString - current state of converted roman numeral (ex. "DLV")
  * @returns {string | React.ReactElement} updated state of converted roman numeral (ex. "\<span className='top-line'\>V\</span\>DLV" from 5555)
  */
@@ -101,11 +101,11 @@ const processLargeNumberVinculum = (
 /**
  * Used in main function {@link romanNumeralsConverter}
  *
- * For numbers above 3999, takes current single arabic numeral, its position in the whole number
- * and the current state of result roman conversion,
+ * For numbers above 3999, takes current single arabic numeral(```currNumber```), its position in the whole number
+ * and the current state of result roman conversion(```resultString```),
  * then adds converted numeral to the roman result (in Apostrophus system).
  * @param {number} currNumber - single arabic numeral to convert (ex. 5)
- * @param {number} position - reverse position of the currNumber param in the original arabic number input (ex. 3)
+ * @param {number} position - reverse position of the ```currNumber``` param in the original arabic number input (ex. 3)
  * @param {string | React.ReactElement} resultString - current state of converted roman numeral (ex. "DLV")
  * @returns {string | React.ReactElement} updated state of converted roman numeral (ex. "ↁ DLV" from 5555)
  */

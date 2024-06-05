@@ -1,5 +1,16 @@
-// Convert individual number to roman numeral
-
+/**
+ * Used in 3 parent functions:
+ * - {@link processSmallNumber}
+ * - {@link processLargeNumberVinculum}
+ * - {@link processLargeNumberApostrophus}
+ *
+ * Takes ```currNumber``` and three params representing roman numerals for "single", "half" and "ten", then returns a roman representation of arabic numeral from ```currNumber```.
+ * @param {number} currNumber - single arabic numeral to convert (ex. 5)
+ * @param {string} currSingularChar - roman numeral representing "single" (ex. "I")
+ * @param {string} currHalfChar - roman numeral representing "half" (ex. "V")
+ * @param {string} currTenChar - roman numeral representing "ten" (ex. "X")
+ * @returns {string} a roman representation of arabic numeral (ex. "V" for 5)
+ */
 const individualRomanCharConverter = (
   currNumber: number,
   currSingularChar: string,
