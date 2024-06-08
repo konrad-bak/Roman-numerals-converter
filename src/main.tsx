@@ -1,4 +1,4 @@
-import './index.css';
+import './index.css?inline';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

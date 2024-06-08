@@ -1,4 +1,4 @@
-import './App.css';
+import './App.css?inline';
 
 import React, { ChangeEvent, useState } from 'react';
 
