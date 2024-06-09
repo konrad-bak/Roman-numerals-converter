@@ -1,11 +1,7 @@
-import './App.css';
-
 import React, { ChangeEvent, useState } from 'react';
-
+import './App.css';
 import { Note } from './components/Note';
-import romanNumeralsConverter from './utils/romanNumeralsConverter';
-
-export type SystemTypes = 'Vinculum' | 'Apostrophus';
+import romanNumeralsConverter, { SystemTypes } from './utils/toRomanNumerals';
 
 function App() {
   const [input, setInput] = useState<number | null>(null);

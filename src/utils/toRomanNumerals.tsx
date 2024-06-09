@@ -1,9 +1,10 @@
-import { SystemTypes } from '../App';
 import individualRomanCharConverter from './individualRomanCharConverter';
 
 const MAX_SMALL_NUMBER = 3999;
 const MAX_NUMBER = 3999999999;
 const TOO_BIG_MESSAGE = 'Too big (over 3,999,999,999)';
+
+export type SystemTypes = 'Vinculum' | 'Apostrophus';
 
 /**
  * Used in two parent functions {@link processSmallNumber} and {@link processLargeNumberVinculum}
@@ -44,7 +45,7 @@ const getApostrophusCharacters = (multiplier: number): [string, string, string] 
 };
 
 /**
- * Used in main function {@link romanNumeralsConverter}
+ * Used in main function {@link toRomanNumerals}
  *
  * For numbers 999 and below, takes current single arabic numeral(```currNumber```), its ```position``` in the whole number
  * and the current state of result roman conversion(```resultString```),
@@ -65,7 +66,7 @@ const processSmallNumber = (
 };
 
 /**
- * Used in main function {@link romanNumeralsConverter}
+ * Used in main function {@link toRomanNumerals}
  *
  * For numbers above 3999, takes current single arabic numeral(```currNumber```), its position in the whole number
  * and the current state of result roman conversion(```resultString```),
@@ -99,7 +100,7 @@ const processLargeNumberVinculum = (
 };
 
 /**
- * Used in main function {@link romanNumeralsConverter}
+ * Used in main function {@link toRomanNumerals}
  *
  * For numbers above 3999, takes current single arabic numeral(```currNumber```), its position in the whole number
  * and the current state of result roman conversion(```resultString```),
@@ -130,11 +131,11 @@ const processLargeNumberApostrophus = (
  *
  * @example
  * // returns "ↁ DLV"
- * romanNumeralsConverter(5555, "Apostrophus");
+ * toRomanNumerals(5555, "Apostrophus");
  *
  * @author Konrad Bąk https://github.com/konrad-bak
  */
-const romanNumeralsConverter = (
+const toRomanNumerals = (
   input: number,
   system: SystemTypes,
 ): string | React.ReactElement => {
@@ -169,4 +170,4 @@ const romanNumeralsConverter = (
   return resultString;
 };
 
-export default romanNumeralsConverter;
+export default toRomanNumerals;
