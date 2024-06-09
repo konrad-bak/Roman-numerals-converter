@@ -167,6 +167,9 @@ const toRomanNumerals = (
     }
   }
 
+  // console.log('for input: ', input, ' We get: ', resultString);
+  console.log(resultString);
+
   return resultString;
 };
 
