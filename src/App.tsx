@@ -1,5 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
 import './App.css';
+
+import React, { ChangeEvent, useState } from 'react';
+
 import { Note } from './components/Note';
 import romanNumeralsConverter, { SystemTypes } from './utils/toRomanNumerals';
 
