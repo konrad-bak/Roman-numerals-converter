@@ -10,7 +10,6 @@ function App() {
   const [submittedInput, setSubmittedInput] = useState<number | null>(null);
   const [result, setResult] = useState<string | React.ReactElement>('');
   const [system, setSystem] = useState<SystemTypes>('Vinculum');
-  const [tooBig, setTooBig] = useState<boolean>(false);
 
   const handleRadioValueChange = (value: SystemTypes): void => {
     setSystem(value);
@@ -25,8 +24,6 @@ function App() {
   const handleClick = () => {
     if (input != null) {
       setSubmittedInput(input);
-      input > 3999999999 ? setTooBig(true) : setTooBig(false);
-
       setResult(romanNumeralsConverter(input, system));
     }
   };
@@ -78,9 +75,7 @@ function App() {
         <p className="result">
           Submitted number: <span>{submittedInput}</span>
         </p>
-        <p className="result">
-          Result: <span className={tooBig ? 'red' : ''}>{result}</span>
-        </p>
+        <p className="result">Result: {result}</p>
       </div>
       <hr />
       <Note />

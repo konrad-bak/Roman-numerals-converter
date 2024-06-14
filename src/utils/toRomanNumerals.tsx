@@ -139,7 +139,7 @@ const toRomanNumerals = (
   input: number,
   system: SystemTypes,
 ): string | React.ReactElement => {
-  if (input > MAX_NUMBER) return TOO_BIG_MESSAGE;
+  if (input > MAX_NUMBER) return <span className="red">{TOO_BIG_MESSAGE}</span>;
 
   const numbersArr = input.toString().split('');
   const arrLength = numbersArr.length;
