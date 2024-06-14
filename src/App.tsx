@@ -3,7 +3,7 @@ import './App.css';
 import React, { ChangeEvent, useState } from 'react';
 
 import { Note } from './components/Note';
-import romanNumeralsConverter, { SystemTypes } from './utils/toRomanNumerals';
+import toRomanNumerals, { SystemTypes } from './utils/toRomanNumerals';
 
 function App() {
   const [input, setInput] = useState<number | null>(null);
@@ -24,7 +24,7 @@ function App() {
   const handleClick = () => {
     if (input != null) {
       setSubmittedInput(input);
-      setResult(romanNumeralsConverter(input, system));
+      setResult(toRomanNumerals(input, system));
     }
   };
 

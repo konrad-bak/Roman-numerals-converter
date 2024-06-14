@@ -39,42 +39,42 @@ or
 
 ### Importing the Converter
 
-First, import the romanCharsConverter function into your project:
+First, import the toRomanNumerals function into your project:
 
 ```typescript
-import romanCharsConverter, { SystemTypes } from 'roman-numerals-converter';
+import toRomanNumerals, { SystemTypes } from 'roman-numerals-converter';
 ```
 
 ### Converting Numbers
 
-You can convert a number to Roman numerals by calling the romanCharsConverter function. The function takes two arguments: the number to convert and the system type ('Vinculum' or 'Apostrophus').
+You can convert a number to Roman numerals by calling the toRomanNumerals function. The function takes two arguments: the number to convert and the system type ('Vinculum' or 'Apostrophus').
 
 ```typescript
 const number = 1234;
 const system: SystemTypes = 'Vinculum'; // or 'Apostrophus'
 
-const romanNumeral = romanCharsConverter(number, system);
+const romanNumeral = toRomanNumerals(number, system);
 console.log(romanNumeral); // Output: "MCCXXXIV"
 ```
 
 Full example:
 
 ```typescript
-import romanCharsConverter from 'roman-numerals-converter';
+import toRomanNumerals from 'roman-numerals-converter';
 import { SystemTypes } from './path-to-your-app-types';
 
 const number = 52000;
 const system: SystemTypes = 'Apostrophus';
 
-const romanNumeral = romanCharsConverter(number, system);
+const romanNumeral = toRomanNumerals(number, system);
 console.log(romanNumeral); // Output: "ↇ ↀↀ"
 ```
 
 ## API
 
-**`romanCharsConverter(input: number, system: SystemTypes): string | React.ReactElement`**
+**`toRomanNumerals(input: number, system: SystemTypes): string | React.ReactElement`**
 
-Converts a number to a Roman numeral string or a React element if using the Vinculum system.
+Converts a number to a Roman numeral string or a React element.
 
 - `input`: The number to convert.
 - `system`: The numeral system to use ('Vinculum' or 'Apostrophus').
@@ -83,7 +83,7 @@ Converts a number to a Roman numeral string or a React element if using the Vinc
 
 Converts an individual number to a Roman numeral string.
 
-- `currNumber`: The current number to convert (0-9).
+- `currNumber`: The current number to convert (1-9).
 - `currSingularChar`: The character representing the singular value (e.g., 'I').
 - `currHalfChar`: The character representing the half value (e.g., 'V').
 - `currTenChar`: The character representing the ten value (e.g., 'X').
