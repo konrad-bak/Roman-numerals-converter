@@ -1,9 +1,9 @@
 import './App.css';
 
 import React, { ChangeEvent, useState } from 'react';
+import toRomanNumerals, { SystemTypes } from 'roman-numerals-converter-lib';
 
 import { Note } from './components/Note';
-import toRomanNumerals, { SystemTypes } from './utils/toRomanNumerals';
 
 function App() {
   const [input, setInput] = useState<number | null>(null);
