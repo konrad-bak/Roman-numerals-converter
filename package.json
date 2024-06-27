@@ -15,7 +15,8 @@
   "dependencies": {
     "eslint": "^8.57.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "roman-numerals-converter-lib": "^1.0.7"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.5",
